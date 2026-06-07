@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alex O'Neill — Creative Director and Strategist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FBFAF6;
+    --ink: #141413;
+    --ink-soft: #2A2A28;
+    --muted: #777570;
+    --rule: #E5E1D7;
+    --serif: "EB Garamond", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --measure: 38rem;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  html, body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 19px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  body { min-height: 100vh; overflow-x: hidden; }
+
+  a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(20,20,19,0.25); transition: border-color .15s ease; }
+  a:hover { border-color: var(--ink); }
+
+  .shell { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .shell-wide { max-width: 1480px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ---------- Header ---------- */
+  header.site {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: transparent;
+    transition: background .3s ease, border-color .3s ease;
+  }
+  header.site.scrolled, header.site.dark-bg-not-needed {
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+  }
+  header.site .row {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 1.4rem 0;
+  }
+  .brand {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: none;
+    white-space: nowrap;
+    color: var(--ink);
+    mix-blend-mode: difference;
+    color: #fff;
+  }
+  nav.primary { display: flex; gap: 2.5rem; }
+  nav.primary a {
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    color: #fff;
+    mix-blend-mode: difference;
+  }
+  nav.primary a.active { border-bottom-color: currentColor; }
+  nav.primary a:hover { border-bottom-color: currentColor; }
+
+  /* When scrolled, switch nav off mix-blend so it reads on bg */
+  header.site.scrolled .brand,
+  header.site.scrolled nav.primary a {
+    mix-blend-mode: normal;
+    color: var(--ink);
+  }
+
+  /* Views */
+  .view { display: none; }
+  .view.active { display: block; animation: fadeIn .35s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* ---------- HERO — full-bleed rotating image stack with overlaid thesis ---------- */
+  .hero-cinema {
+    position: relative;
+    height: 100vh;
+    min-height: 640px;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+  }
+  .hero-stage {
+    position: absolute; inset: 0;
+  }
+  .hero-slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+    will-change: opacity, transform;
+    animation: kenburns 18s ease-in-out infinite alternate;
+  }
+  .hero-slide.is-active { opacity: 1; }
+  @keyframes kenburns {
+    from { transform: scale(1.0); }
+    to { transform: scale(1.08); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 28% 68%, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.44) 30%, rgba(0,0,0,0.16) 62%, rgba(0,0,0,0.38) 100%),
+      linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.16) 35%, rgba(0,0,0,0.22) 60%, rgba(0,0,0,0.72) 100%);
+    pointer-events: none;
+  }
+  .hero-content {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 0 0 5.5rem;
+    color: #fff;
+  }
+  .hero-content .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.4rem 2rem 1.6rem;
+    background: linear-gradient(90deg, rgba(0,0,0,0.48) 0%, rgba(0,0,0,0.30) 48%, rgba(0,0,0,0) 100%);
+    backdrop-filter: blur(1.5px);
+    border-radius: 2px;
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 1.6rem;
+  }
+  .thesis {
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 6vw, 5.4rem);
+    line-height: 1.04;
+    letter-spacing: -0.014em;
+    font-weight: 500;
+    max-width: 20ch;
+    color: #fff;
+    text-shadow: 0 2px 30px rgba(0,0,0,0.25);
+  }
+  .thesis em { font-style: italic; font-weight: 500; }
+  .hero-scroll-cue {
+    position: absolute; left: 50%; transform: translateX(-50%);
+    bottom: 1.8rem;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    border: none;
+  }
+  .hero-scroll-cue::after {
+    content: "↓";
+    display: block;
+    margin-top: 0.5rem;
+    text-align: center;
+    animation: bob 2.6s ease-in-out infinite;
+    font-size: 14px;
+  }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+  /* ---------- Marquee strip ---------- */
+  .marquee {
+    overflow: hidden;
+    padding: 2.4rem 0 2.6rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--bg);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 2.4rem;
+    animation: scroll 60s linear infinite;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-item {
+    width: 220px;
+    flex-shrink: 0;
+    text-align: left;
+    border: none;
+  }
+  .marquee-item .mi-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: #1a1a1a;
+    overflow: hidden;
+    margin-bottom: 0.7rem;
+  }
+  .marquee-item .mi-img img { width: 100%; height: 100%; object-fit: cover; }
+  .marquee-item .mi-caption {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .marquee-item .mi-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--ink);
+    margin-top: 0.15rem;
+  }
+
+  /* ---------- Featured projects (full-bleed magazine-spread style) ---------- */
+  .featured {
+    padding: 6rem 0 0;
+  }
+  .featured-head {
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+  .featured-head .eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .featured-head .lead {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+    line-height: 1.25;
+    font-weight: 500;
+    max-width: 28ch;
+  }
+
+  .feature-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: stretch;
+    margin-bottom: 0;
+  }
+  .feature-row.reverse .feature-text { order: 2; }
+  .feature-row.reverse .feature-img { order: 1; }
+  .feature-img {
+    position: relative;
+    background: #1a1a1a;
+    overflow: hidden;
+    min-height: 80vh;
+  }
+  .feature-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 1.6s ease;
+  }
+  .feature-row:hover .feature-img img { transform: scale(1.04); }
+  .feature-text {
+    padding: 6rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .feature-text .ft-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.4rem;
+  }
+  .feature-text .ft-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.6rem;
+  }
+  .feature-text .ft-body {
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 32rem;
+    margin-bottom: 2.2rem;
+  }
+  .feature-text .ft-cta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    align-self: flex-start;
+  }
+  .feature-text .ft-cta:hover { color: var(--muted); border-color: var(--muted); }
+  @media (max-width: 900px) {
+    .feature-row { grid-template-columns: 1fr; }
+    .feature-row.reverse .feature-text { order: 2; }
+    .feature-row.reverse .feature-img { order: 1; }
+    .feature-img { min-height: 60vh; }
+    .feature-text { padding: 3rem 1.6rem; }
+  }
+
+  /* ---------- Home secondary sections (Notes preview + about teaser) ---------- */
+  .home-section { padding: 6rem 0; border-top: 1px solid var(--rule); }
+  .home-section .head {
+    max-width: 1200px; margin: 0 auto 3rem; padding: 0 2rem;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 2rem;
+  }
+  .home-section .head .eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .home-section .head .more {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: none;
+    color: var(--muted);
+  }
+  .home-section .head .more:hover { color: var(--ink); }
+
+  .notes-preview-grid {
+    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem;
+  }
+  @media (max-width: 800px) { .notes-preview-grid { grid-template-columns: 1fr; gap: 2rem; } }
+  .note-card {
+    border: none;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.6rem;
+  }
+  .note-card .nc-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.7rem;
+  }
+  .note-card .nc-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 0.6rem;
+  }
+  .note-card .nc-dek {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* ---------- Inner page heads ---------- */
+  .inner-page { padding: 8rem 0 6rem; }
+  .page-head {
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .page-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+  .page-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    max-width: 24ch;
+  }
+
+  /* ---------- Work index — denser, more visual, magazine grid ---------- */
+  .era-block { margin-bottom: 6rem; }
+  .era-label {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .era-label .era-name { color: var(--ink); margin-right: 0.6rem; font-weight: 600; }
+
+  .era-copy {
+    max-width: 48rem;
+    margin: -1.8rem 0 2.2rem;
+    font-family: var(--serif);
+    font-size: 1.18rem;
+    line-height: 1.48;
+    color: var(--ink-soft);
+  }
+  .era-copy strong { color: var(--ink); font-weight: 500; }
+
+
+  /* asymmetric magazine grid */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.6rem;
+  }
+  .wg-card {
+    border: none;
+    position: relative;
+    display: block;
+  }
+  .wg-card .wgc-img {
+    width: 100%;
+    background: #f3f1eb;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    aspect-ratio: 4/5;
+  }
+  .wg-card.wide .wgc-img { aspect-ratio: 16/9; }
+  .wg-card.tall .wgc-img { aspect-ratio: 3/4; }
+  .wg-card.square .wgc-img { aspect-ratio: 1/1; }
+  .wg-card .wgc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease; }
+  .wg-card:hover .wgc-img img { transform: scale(1.03); }
+  .wg-card .wgc-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+  .wg-card .wgc-title {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .wg-card .wgc-intro {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 1rem;
+    line-height: 1.45;
+    max-width: 38ch;
+  }
+
+  /* spans */
+  .span-3 { grid-column: span 3; }
+  .span-4 { grid-column: span 4; }
+  .span-2 { grid-column: span 2; }
+  @media (max-width: 900px) {
+    .work-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+    .span-3, .span-4, .span-2 { grid-column: auto; }
+  }
+
+  .press-line {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--muted);
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  /* ---------- Project detail ---------- */
+  .project-hero {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    min-height: 520px;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+  .project-hero img { width: 100%; height: 100%; object-fit: cover; }
+  .project-hero-overlay { position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(0,0,0,0.56) 0%, rgba(0,0,0,0.30) 34%, rgba(0,0,0,0.10) 66%, rgba(0,0,0,0.36) 100%), linear-gradient(180deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.06) 32%, rgba(0,0,0,0.12) 60%, rgba(0,0,0,0.78) 100%); }
+  .project-hero-content { position: absolute; left: 0; right: 0; bottom: 0; padding: 0 0 4rem; color: #fff; }
+  .project-hero-content .inner { max-width: 1200px; margin: 0 auto; padding: 1.1rem 2rem 1.35rem; background: linear-gradient(90deg, rgba(0,0,0,0.46) 0%, rgba(0,0,0,0.28) 48%, rgba(0,0,0,0) 100%); backdrop-filter: blur(1.5px); border-radius: 2px; }
+  .project-hero-content .ph-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 1rem;
+  }
+  .project-hero-content h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    max-width: 22ch;
+  }
+
+  .project-body { padding: 5rem 0; }
+  .prose { max-width: var(--measure); margin: 0 auto; font-size: 1.1rem; line-height: 1.65; padding: 0 2rem; }
+  .prose p { margin-bottom: 1.3rem; }
+  .prose p.lede { font-size: 1.32rem; line-height: 1.5; font-style: italic; color: var(--ink-soft); margin-bottom: 1.8rem; }
+  .prose h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 1.4rem;
+    margin: 2.5rem 0 0.8rem;
+  }
+  .breadcrumb {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: none;
+  }
+  .breadcrumb a { border: none; color: var(--muted); }
+  .breadcrumb a:hover { color: var(--ink); }
+
+  /* Studio Radiance stats */
+  .radiance-stats {
+    max-width: 1200px; margin: 4rem auto; padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.6rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  @media (max-width: 720px) { .radiance-stats { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.4rem; } }
+  .stat-num { font-family: var(--serif); font-size: 3.4rem; font-weight: 500; line-height: 1; letter-spacing: -0.02em; }
+  .stat-label { font-family: var(--sans); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.7rem; line-height: 1.4; }
+
+
+  /* Role / date / performance modules */
+  .project-facts {
+    max-width: 1200px; margin: 0 auto 3.8rem; padding: 0 2rem;
+    display: grid; grid-template-columns: 0.9fr 1.4fr; gap: 2.5rem;
+    align-items: start;
+  }
+  .fact-card {
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    padding: 1.35rem 0;
+    font-family: var(--sans);
+  }
+  .fact-row { display: grid; grid-template-columns: 96px 1fr; gap: 1rem; padding: 0.55rem 0; border-bottom: 1px solid rgba(20,20,20,0.08); }
+  .fact-row:last-child { border-bottom: none; }
+  .fact-label { font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .fact-value { font-size: 12px; line-height: 1.45; color: var(--ink); }
+  .role-task { display: grid; gap: 1.2rem; }
+  .role-task h3 { margin: 0 0 0.35rem; font-family: var(--serif); font-weight: 500; font-style: italic; font-size: 1.35rem; }
+  .role-task p { margin: 0; font-size: 1.02rem; line-height: 1.62; color: var(--ink-soft); }
+
+  @media (max-width: 850px) {
+    .role-task[style*="repeat(3"] { grid-template-columns: 1fr !important; }
+  }
+  .impact-stats {
+    max-width: 1200px; margin: 3.8rem auto; padding: 2.6rem 2rem;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem;
+    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  }
+  .impact-stats.five { grid-template-columns: repeat(5, 1fr); }
+  .impact-stats.three { grid-template-columns: repeat(3, 1fr); }
+  .impact-note { max-width: 1200px; margin: -2.6rem auto 3.8rem; padding: 0 2rem; font-family: var(--sans); font-size: 11px; letter-spacing: 0.05em; color: var(--muted); line-height: 1.5; }
+  @media (max-width: 850px) {
+    .project-facts { grid-template-columns: 1fr; gap: 1.8rem; }
+    .impact-stats, .impact-stats.five, .impact-stats.three { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 500px) {
+    .impact-stats, .impact-stats.five, .impact-stats.three { grid-template-columns: 1fr; }
+  }
+
+  /* Vogue/Interview style — photographer-credit gallery */
+  .credit-gallery {
+    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  }
+  @media (max-width: 800px) { .credit-gallery { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .credit-gallery { grid-template-columns: 1fr; } }
+  .credit-item { margin-bottom: 2.2rem; }
+  .credit-item img { width: 100%; display: block; margin-bottom: 0.8rem; aspect-ratio: 1 / 1; object-fit: cover; object-position: center; background: #f3f1eb; cursor: zoom-in; }
+  .credit-name { font-family: var(--serif); font-size: 1.16rem; font-style: italic; line-height: 1.2; }
+  .credit-photographer { font-family: var(--sans); font-size: 12px; letter-spacing: 0.02em; text-transform: none; color: var(--muted); margin-top: 0.42rem; line-height: 1.48; }
+
+  .credit-item.featured { grid-column: span 2; }
+  .credit-item.featured img { aspect-ratio: 16 / 10; }
+  @media (max-width: 800px) { .credit-item.featured { grid-column: span 2; } }
+  @media (max-width: 500px) { .credit-item.featured { grid-column: span 1; } .credit-item.featured img { aspect-ratio: 1 / 1; } }
+
+
+  .media-image { width: 100%; display: block; background: #f3f1eb; cursor: zoom-in; }
+  .gallery-note { font-family: var(--sans); font-size: 12px; color: var(--muted); letter-spacing: 0.02em; margin: 0.7rem 0 0; }
+  .lightbox {
+    position: fixed; inset: 0; z-index: 1000;
+    display: none; align-items: center; justify-content: center;
+    background: rgba(12,12,12,0.88); padding: 2rem;
+  }
+  .lightbox.is-open { display: flex; }
+  .lightbox img { max-width: 94vw; max-height: 88vh; object-fit: contain; background: #f3f1eb; }
+  .lightbox-caption { position: fixed; left: 2rem; right: 2rem; bottom: 1rem; color: rgba(255,255,255,0.86); font-family: var(--sans); font-size: 12px; letter-spacing: 0.02em; text-transform: none; line-height: 1.45; text-align: center; }
+  .lightbox-close { position: fixed; top: 1rem; right: 1.2rem; border: none; background: transparent; color: #fff; font-size: 2rem; line-height: 1; cursor: pointer; }
+
+  /* ---------- Notes (kept editorial-restrained) ---------- */
+  .notes-intro { max-width: 38rem; font-style: italic; color: var(--ink-soft); font-size: 1.15rem; margin-bottom: 4rem; }
+  .notes-list { max-width: 44rem; }
+  .note-row { display: grid; grid-template-columns: 110px 1fr; gap: 2rem; padding: 2rem 0; border-top: 1px solid var(--rule); align-items: baseline; }
+  .note-row:last-child { border-bottom: 1px solid var(--rule); }
+  .note-row a { border: none; display: contents; }
+  .note-meta { font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); line-height: 1.5; }
+  .note-title { font-family: var(--serif); font-size: 1.45rem; font-weight: 500; line-height: 1.25; margin-bottom: 0.4rem; }
+  .note-dek { font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 1.05rem; }
+  .note-row:hover .note-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
+  .note-detail { max-width: 36rem; margin: 0 auto; padding: 0 2rem; }
+  .note-detail .note-meta { margin-bottom: 1.5rem; }
+  .note-detail h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(2rem, 3.6vw, 2.8rem); line-height: 1.15; margin-bottom: 2.8rem; letter-spacing: -0.01em; }
+  .note-detail p { font-family: var(--serif); font-size: 1.18rem; line-height: 1.65; margin-bottom: 1.4rem; }
+  .note-detail p:first-of-type::first-letter { font-size: 3.4em; float: left; line-height: 0.85; margin: 0.05em 0.08em 0 0; font-weight: 500; }
+
+  /* About */
+  .about-wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
+  @media (max-width: 800px) { .about-wrap { grid-template-columns: 1fr; } }
+  .about-portrait { width: 100%; aspect-ratio: 3/4; background: #1a1a1a; overflow: hidden; }
+  .about-portrait img { width: 100%; height: 100%; object-fit: cover; }
+  .about-prose { font-size: 1.2rem; line-height: 1.6; }
+  .about-prose p { margin-bottom: 1.3rem; }
+
+  /* Contact */
+  .contact-block { text-align: center; padding: 6rem 0 4rem; max-width: 1200px; margin: 0 auto; }
+  .contact-block .big-email { font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.6rem); font-weight: 500; line-height: 1.1; display: inline-block; border-bottom: 1px solid var(--rule); padding-bottom: 0.4rem; }
+  .contact-block .big-email:hover { border-bottom-color: var(--ink); }
+  .contact-block .sub { font-family: var(--serif); font-style: italic; color: var(--ink-soft); margin-top: 1.5rem; font-size: 1.15rem; }
+
+  /* Footer */
+  footer.site { border-top: 1px solid var(--rule); padding: 3rem 0 4rem; margin-top: 0; }
+  footer.site .row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1.5rem; }
+  footer.site .footer-thesis { font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 1.05rem; max-width: 38rem; }
+  footer.site .footer-meta { font-family: var(--sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-align: right; }
+  footer.site .footer-meta a { border: none; color: var(--muted); margin-left: 1rem; }
+  footer.site .footer-meta a:hover { color: var(--ink); }
+
+  .back-link { font-family: var(--sans); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); border: none; margin-bottom: 2.5rem; display: inline-block; }
+  .back-link:hover { color: var(--ink); }
+
+  /* Mobile fixes */
+  @media (max-width: 640px) {
+    header.site .row { flex-direction: column; align-items: center; gap: 0.6rem; padding: 1rem 0 0.9rem; }
+    .shell { padding: 0 1.4rem; }
+    .brand { font-size: 11px; letter-spacing: 0.18em; }
+    nav.primary { gap: 1.6rem; }
+    nav.primary a { font-size: 11px; letter-spacing: 0.08em; }
+    .hero-cinema { height: 100vh; min-height: 560px; }
+    .hero-content { padding: 0 0 3rem; }
+    .hero-eyebrow { font-size: 10.5px; letter-spacing: 0.18em; margin-bottom: 1.1rem; }
+    .thesis { font-size: 2.4rem; line-height: 1.08; max-width: none; }
+    .inner-page { padding: 6rem 0 4rem; }
+    .marquee-item { width: 160px; }
+    .featured { padding: 4rem 0 0; }
+    .featured-head { padding: 0 1.4rem; margin-bottom: 2.5rem; }
+    .home-section { padding: 4rem 0; }
+    .home-section .head { padding: 0 1.4rem; }
+    .feature-text { padding: 3rem 1.4rem; }
+    .feature-img { min-height: 50vh; }
+    .project-hero { height: 60vh; min-height: 420px; }
+    .project-hero-content { padding: 0 0 2.5rem; }
+    .project-hero-content .inner { padding: 0 1.4rem; }
+    .radiance-stats { padding: 1.8rem 1.4rem; margin: 2rem 0; }
+    .stat-num { font-size: 2.4rem; }
+    .credit-gallery { padding: 0 1.4rem; }
+    .about-wrap { padding: 0 1.4rem; gap: 2rem; }
+    footer.site .row { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+    footer.site .footer-meta { text-align: left; }
+    footer.site .footer-meta a { margin-left: 0; margin-right: 1rem; }
+    .note-row { grid-template-columns: 1fr; gap: 0.6rem; padding: 1.5rem 0; }
+  }
+
+
+  .video-embed-section { max-width: 1180px; margin: 4rem auto 0; padding: 0 2rem; }
+  .video-feature { margin-top: 2.5rem; }
+  .vimeo-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #111; overflow: hidden; }
+  .vimeo-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .video-caption { font-family: var(--sans); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.65rem; }
+  .video-caption strong { display: block; font-family: var(--serif); font-size: 22px; letter-spacing: 0; text-transform: none; color: var(--ink); margin-bottom: 0.2rem; font-weight: 500; }
+  @media (max-width: 760px) { .video-grid { grid-template-columns: 1fr; } }
+
+
+  /* DanceOne video layout — phone-first verticals, full-width horizontals */
+  .dance-video-section { max-width: 1200px; margin: 4rem auto 0; padding: 0 2rem; }
+  .dance-video-feature { max-width: 420px; margin: 0 auto; }
+  .dance-video-grid { max-width: 1200px; margin: 3rem auto 0; padding: 0 2rem; display: grid; grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr); gap: 2rem; align-items: start; }
+  .dance-vertical-stack { display: grid; gap: 1.5rem; }
+  .dance-phone-card { max-width: 360px; margin: 0 auto; }
+  .dance-landscape-stack { display: grid; gap: 2rem; }
+  .dance-video-card video { width: 100%; display: block; background: #111; }
+  .dance-phone-card video { aspect-ratio: 9 / 16; object-fit: cover; }
+  .dance-landscape-card video { aspect-ratio: 16 / 9; object-fit: cover; }
+  .dance-video-caption { font-family: var(--sans); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.65rem; }
+  .dance-video-feature .dance-video-caption { text-align: center; letter-spacing: 0.18em; }
+  @media (max-width: 860px) {
+    .dance-video-grid { grid-template-columns: 1fr; }
+    .dance-vertical-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .dance-phone-card { max-width: none; }
+  }
+  @media (max-width: 560px) {
+    .dance-vertical-stack { grid-template-columns: 1fr; }
+    .dance-phone-card { max-width: 340px; }
+  }
+
+</style>
+</head>
+<body>
+
+<header class="site" id="siteHeader">
+  <div class="shell row">
+    <a href="#home" class="brand" data-nav="home">Alex O'Neill</a>
+    <nav class="primary">
+      <a href="#work" data-nav="work">Work</a>
+      <a href="#notes" data-nav="notes">Notes</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       HOME — FULL-BLEED CINEMATIC HERO + MARQUEE + FEATURED PROJECTS
+       ============================================================ -->
+  <section class="view active" id="home">
+
+    <!-- Cinema hero -->
+    <div class="hero-cinema">
+      <div class="hero-stage" id="heroStage">
+        <div class="hero-slide is-active" style="background-image: url('/images/vogue/vogue-wild-child.png');"></div>
+        <div class="hero-slide" style="background-image: url('/images/amika/cleanical-hero.webp');"></div>
+        <div class="hero-slide" style="background-image: url('/images/interview/charlize-kristen.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('/images/vogue/vogue-kendall-dream-season.png');"></div>
+        <div class="hero-slide" style="background-image: url('/images/vogue/vogue-girl-on-fire.png');"></div>
+        <div class="hero-slide" style="background-image: url('/images/interview/brad-pitt.jpg');"></div>
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="inner">
+          <div class="hero-eyebrow">Alex O'Neill · Creative Director and Strategist · New York</div>
+          <h1 class="thesis">I'm a creative director and strategist. <em>Mostly</em> I help brands stop sounding fake.</h1>
+        </div>
+      </div>
+      <a class="hero-scroll-cue" href="#workmarq">Selected Work</a>
+    </div>
+
+    <!-- Marquee strip -->
+    <div class="marquee" id="workmarq">
+      <div class="marquee-track" id="marqueeTrack">
+        <!-- duplicated below via JS for seamless loop -->
+      </div>
+    </div>
+
+    <!-- Featured projects -->
+    <div class="featured">
+      <div class="featured-head">
+        <div class="eyebrow">Featured · 2016 — 2024</div>
+        <div class="lead">Four ways of figuring out what people will actually trust again.</div>
+      </div>
+
+      <!-- Studio Radiance -->
+      <a href="#work/mac" class="feature-row" style="border: none;">
+        <div class="feature-img">
+          <img src="/images/mac/studio-radiance/face-and-body.gif" alt="M·A·C Studio Radiance">
+        </div>
+        <div class="feature-text">
+          <div class="ft-eyebrow">M·A·C · 2021 · Global Director, Digital Innovation</div>
+          <div class="ft-title">A foundation campaign that refused retouching.</div>
+          <p class="ft-body">Documentary photography by Micaiah Carter and Campbell Addy of The New Black Vanguard. Cast shot at home. Seven days. Zero retouching, by decision.</p>
+          <span class="ft-cta">View project →</span>
+        </div>
+      </a>
+
+      <!-- Bella Hadid -->
+      <a href="#work/vogue" class="feature-row reverse" style="border: none;">
+        <div class="feature-img">
+          <img src="/images/vogue/vogue-wild-child.png" alt="Bella Hadid for Vogue, September 2016">
+        </div>
+        <div class="feature-text">
+          <div class="ft-eyebrow">Vogue · Integrated Visual Director · 2014 — 2016</div>
+          <div class="ft-title">A picture is a position.</div>
+          <p class="ft-body">Photographed by Sean Thomas for Vogue's beauty feature. A rowboat in Central Park Pond. A tutorial in a hotel bathroom. Two million YouTube views. One million Instagram likes. A specific, physical idea that didn't apologize.</p>
+          <span class="ft-cta">View Vogue →</span>
+        </div>
+      </a>
+
+      <!-- Amika Get Drenched -->
+      <a href="#work/amika" class="feature-row" style="border: none;">
+        <div class="feature-img">
+          <img src="/images/amika/get-drenched-hydration-tour.webp" alt="Amika Get Drenched hydration tour bus campaign">
+        </div>
+        <div class="feature-text">
+          <div class="ft-eyebrow">Amika · 2022 — 2024 · Creative Director</div>
+          <div class="ft-title">A hydration story we put on a bus.</div>
+          <p class="ft-body">Number one hair brand at Sephora during Let's Get Cleanical. 35%+ growth on shampoo and conditioner. A summer OOH idea you can't dashboard your way to.</p>
+          <span class="ft-cta">View Amika →</span>
+        </div>
+      </a>
+
+      <!-- NARS / Baron & Baron -->
+      <a href="#work/nars" class="feature-row reverse" style="border: none;">
+        <div class="feature-img">
+          <img src="/images/nars/metaverse-1.webp" alt="NARS concepts">
+        </div>
+        <div class="feature-text">
+          <div class="ft-eyebrow">Baron &amp; Baron, for NARS · Concept Development</div>
+          <div class="ft-title">Concepts the brand had to stop apologizing to use.</div>
+          <p class="ft-body">Orgasm — sex-positive. Honey Dijon at Coachella. House of NARS in the metaverse. “30 minutes away” travel posters made of real sand. Ideas built to outlast the campaign window.</p>
+          <span class="ft-cta">View concepts →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Notes preview -->
+    <div class="home-section">
+      <div class="head">
+        <div class="eyebrow">Notes on Brands That Mean Something</div>
+        <a href="#notes" class="more">All notes →</a>
+      </div>
+      <div class="notes-preview-grid">
+        <a href="#notes/camera-and-the-machine" class="note-card">
+          <div class="nc-meta">Frameworks · June 2026</div>
+          <div class="nc-title">On the camera and the machine.</div>
+          <p class="nc-dek">New tools do not kill creativity. They expand it. The camera did not replace painting. AI is asking us to do the same.</p>
+        </a>
+        <a href="#notes/working-with-the-machine" class="note-card">
+          <div class="nc-meta">Frameworks · June 2026</div>
+          <div class="nc-title">On working with the machine.</div>
+          <p class="nc-dek">AI doesn't replace creative directors. It separates the ones who lead with ideas from the ones who hide behind execution.</p>
+        </a>
+        <a href="#notes/moves-i-made" class="note-card">
+          <div class="nc-meta">Letters · June 2026</div>
+          <div class="nc-title">On the moves I made.</div>
+          <p class="nc-dek">Read one way, the arc looks chaotic. Read another way, it is the only path that gets me to the work I am actually trying to do.</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="press-line shell" style="padding-bottom: 4rem;">As referenced in <a href="https://www.businessoffashion.com/articles/marketing-pr/why-surrealist-marketing-is-suddenly-everywhere/" target="_blank">Business of Fashion — "Why Surrealist Marketing Is Suddenly Everywhere"</a> (June 2023).</div>
+
+  </section>
+
+  <!-- ============================================================
+       WORK INDEX
+       ============================================================ -->
+  <section class="view inner-page" id="work">
+    <div class="shell">
+      <div class="page-head">
+        <div class="page-eyebrow">Selected Work · 2010 — Present</div>
+        <h2 class="page-title">Three eras of figuring out how brands earn attention.</h2>
+      </div>
+
+      <div class="era-block">
+        <div class="era-label"><span class="era-name">Editorial</span> · when magazines were the room</div>
+        <p class="era-copy">I came up here because culture was being made in magazines when I started — Interview, then Vogue. I left when it was no longer the only room. Editorial taught me what a picture is for: how an image earns its place, how talent changes the temperature of a story, and how taste becomes an argument.</p>
+        <div class="work-grid">
+          <a class="wg-card span-4 wide" href="#work/vogue">
+            <div class="wgc-img"><img src="/images/vogue/vogue-something-in-the-air.webp" alt="Something in the Air, Vogue"></div>
+            <div class="wgc-meta">Vogue · Integrated Visual Director · July 2014 — October 2016</div>
+            <div class="wgc-title">Vogue</div>
+            <div class="wgc-intro">A picture is a position. Climate, beauty, style, music, food, architecture — the years magazines still made cultural arguments through images.</div>
+          </a>
+          <a class="wg-card span-2 tall" href="#work/interview">
+            <div class="wgc-img"><img src="/images/interview/charlize-kristen.jpg" alt="Interview Magazine"></div>
+            <div class="wgc-meta">Interview · Visual Editor · 2010 — 2013</div>
+            <div class="wgc-title">Interview Magazine</div>
+            <div class="wgc-intro">Celebrity portraiture as cultural argument.</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="era-block">
+        <div class="era-label"><span class="era-name">Platform</span> · brand-side, when reach became the work</div>
+        <p class="era-copy">I went brand-side when the question stopped being <em>what should the picture look like?</em> and started being <em>what should the brand actually be doing?</em> M·A·C, Amika, and DanceOne were each a different answer to the same problem: how a brand earns attention on platforms instead of in magazines.</p>
+        <div class="work-grid">
+          <a class="wg-card span-3 wide" href="#work/mac">
+            <div class="wgc-img"><img src="/images/mac/studio-radiance/face-and-body.gif" alt="M·A·C Studio Radiance"></div>
+            <div class="wgc-meta">M·A·C · Global Director, Digital Innovation · November 2019 — January 2021</div>
+            <div class="wgc-title">M·A·C Studio Radiance</div>
+            <div class="wgc-intro">A foundation campaign that refused retouching. Documentary by The New Black Vanguard.</div>
+          </a>
+          <a class="wg-card span-3 wide" href="#work/amika">
+            <div class="wgc-img"><img src="/images/amika/get-drenched-hydration-tour.webp" alt="Amika Get Drenched hydration tour"></div>
+            <div class="wgc-meta">Amika · Creative Director · June 2022 — January 2023</div>
+            <div class="wgc-title">Amika</div>
+            <div class="wgc-intro">DTC growth without faking scale. #1 hair brand at Sephora during Cleanical.</div>
+          </a>
+          <a class="wg-card span-2 square" href="#work/danceone">
+            <div class="wgc-img"><img src="/images/danceone/kaos-hero.gif" alt="DanceOne"></div>
+            <div class="wgc-meta">DanceOne · Director, Content Strategy & Operations · June 2024 — June 2025</div>
+            <div class="wgc-title">DanceOne</div>
+            <div class="wgc-intro">Content systems for the way culture actually moves now.</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="era-block">
+        <div class="era-label"><span class="era-name">Strategy</span> · creative direction at the level of the brief</div>
+        <p class="era-copy">The work I am most interested in now sits upstream of the campaign — concepts and pitches at the level of the brief. The brands that will matter next need someone who understands the editorial register, the platform mechanics, and the strategic argument. I have spent fifteen years building that. This is where I want the next chapter.</p>
+        <div class="work-grid">
+          <a class="wg-card span-3 wide" href="#work/nars">
+            <div class="wgc-img"><img src="/images/nars/metaverse-1.webp" alt="NARS concepts"></div>
+            <div class="wgc-meta">Baron &amp; Baron, for NARS · Concept Development</div>
+            <div class="wgc-title">NARS — concepts</div>
+            <div class="wgc-intro">House of NARS. Orgasm, sex-positive. Honey Dijon at Coachella. “30 minutes away.” Ideas the brand had to stop apologizing to use.</div>
+          </a>
+          <a class="wg-card span-3 wide" href="#work/snowpeak">
+            <div class="wgc-img"><img src="/images/strategy/snowpeak/slide-01.jpg" alt="Snow Peak Return"></div>
+            <div class="wgc-meta">Snow Peak · 2026 · US Brand Campaign Concept</div>
+            <div class="wgc-title">Snow Peak — Return</div>
+            <div class="wgc-intro">Patagonia owns sustainability. Arc'teryx owns performance. Snow Peak can own what no outdoor brand in America currently owns — permanence.</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="press-line">As referenced in <a href="https://www.businessoffashion.com/articles/marketing-pr/why-surrealist-marketing-is-suddenly-everywhere/" target="_blank">Business of Fashion — "Why Surrealist Marketing Is Suddenly Everywhere"</a> (June 2023).</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECT: STUDIO RADIANCE
+       ============================================================ -->
+  <section class="view" id="work/mac">
+    <div class="project-hero">
+      <img src="/images/mac/studio-radiance/face-and-body.gif" alt="M·A·C Studio Radiance">
+      <div class="project-hero-overlay"></div>
+      <div class="project-hero-content">
+        <div class="inner">
+          <div class="ph-eyebrow">M·A·C · Global Director, Digital Innovation · November 2019 — January 2021</div>
+          <h1>M·A·C Studio Radiance.</h1>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <div class="shell"><a class="back-link" href="#work">← Selected Work</a></div>
+      <div class="project-facts">
+        <div class="fact-card">
+          <div class="fact-row"><div class="fact-label">Role</div><div class="fact-value">Global Director, Digital Innovation</div></div>
+          <div class="fact-row"><div class="fact-label">Company</div><div class="fact-value">M·A·C Cosmetics</div></div>
+          <div class="fact-row"><div class="fact-label">Tenure</div><div class="fact-value">November 2019 — January 2021</div></div>
+          <div class="fact-row"><div class="fact-label">Focus</div><div class="fact-value">Digital-first 360 campaign systems, e-commerce storytelling, virtual try-on, shade matching, and global creative translation.</div></div>
+        </div>
+        <div class="role-task">
+          <div><h3>My Role</h3><p>I led creative ideation with the art team, focusing on digital-first, 360 concepts that could work across global markets. My job was to define the visual approach, make sure it translated across every touchpoint, and shape a modern skin aesthetic for the brand.</p></div>
+          <div><h3>The Task</h3><p>M·A·C brought me in to help modernize how the brand showed up online. At the time, a large share of sales was still happening in stores, so the goal was to build digital-first creative that could actually move the business: stronger e-commerce storytelling, better paid performance, and a more cohesive experience across social, site, and virtual try-on.</p></div>
+        </div>
+      </div>
+      <div class="prose">
+        <p class="lede">The brief was to modernize a foundation. The actual job was to stop pretending.</p>
+        <p>Beauty had spent thirty years retouching. The customer had spent the last ten learning to read it. The polite move was to retouch less. The interesting move was to stop entirely. So we did.</p>
+        <p>Micaiah Carter and Campbell Addy — both part of <em>The New Black Vanguard</em> — shot the cast at home. One photographer. One makeup artist. Seven days. Zero retouching. The cast filmed themselves for the rest of the week. The campaign was assembled out of what the camera actually saw.</p>
+      </div>
+
+      <div class="impact-stats">
+        <div><div class="stat-num">31%</div><div class="stat-label">Sales lift connected to the Studio Radiance launch</div></div>
+        <div><div class="stat-num">49%</div><div class="stat-label">Increase in unique web traffic across digital initiatives</div></div>
+        <div><div class="stat-num">57%</div><div class="stat-label">Global reach growth across the campaign ecosystem</div></div>
+        <div><div class="stat-num">30%</div><div class="stat-label">Faster campaign development through reworked workflows</div></div>
+      </div>
+      <div class="impact-note">Impact figures are surfaced here because they were previously buried in body copy and easy to miss.</div>
+
+      <div class="radiance-stats">
+        <div><div class="stat-num">1</div><div class="stat-label">Cast of activists, creatives, athletes, influencers</div></div>
+        <div><div class="stat-num">2</div><div class="stat-label">Photographers — Carter (NY/LA) and Addy (London)</div></div>
+        <div><div class="stat-num">7</div><div class="stat-label">Days on location, in cast members' homes</div></div>
+        <div><div class="stat-num">100<span style="font-size:0.55em;vertical-align:super;">+</span></div><div class="stat-label">Self-captured photos and videos from cast</div></div>
+        <div><div class="stat-num">0</div><div class="stat-label">Retouching — by decision, not oversight</div></div>
+      </div>
+
+      <div class="prose">
+        <p>The numbers were good.</p>
+        <p>The number the numbers don't show is the one I care most about: a foundation campaign that took the customer's intelligence as the brief's starting point.</p>
+        <p>Studio Radiance went on to become one of M·A·C's top-selling foundations, expanded to 30 shades, and accelerated the brand's digital business across virtual try-on, shade-matching, and artist concierge.</p>
+      </div>
+
+      <div style="max-width: 1200px; margin: 4rem auto 0; padding: 0 2rem;">
+        <video src="/videos/mac/studio-radiance/anthem-30.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video>
+        <p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 0.8rem; text-align: center;">Studio Radiance — Anthem (30 second cut)</p>
+      </div>
+
+      <div style="max-width: 1200px; margin: 3rem auto 0; padding: 0 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+        <div><video src="/videos/mac/studio-radiance/diary-1.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Cast Diary 01</p></div>
+        <div><video src="/videos/mac/studio-radiance/diary-2.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Cast Diary 02</p></div>
+        <div><video src="/videos/mac/studio-radiance/diary-3.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Cast Diary 03</p></div>
+      </div>
+
+      <div style="max-width: 1200px; margin: 5rem auto 0; padding: 0 2rem;">
+        <h3 style="font-family: 'EB Garamond', serif; font-weight: 500; font-style: italic; font-size: 1.6rem; margin-bottom: 1.2rem;">Frosted Firework — Holiday 2021.</h3>
+        <p style="font-family: 'EB Garamond', serif; font-size: 1.1rem; line-height: 1.65; margin-bottom: 2rem; max-width: 44rem;">A global holiday campaign built to position M·A·C as the number one destination for gifting and festive looks — with a digital-first toolkit that could scale across markets, talent, channels, and daily product moments.</p>
+        <div class="role-task" style="margin: 0 0 2.4rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem;">
+          <div><h3>The Task</h3><p>Create a global holiday campaign that positioned M·A·C as the destination for gifting and festive looks, then translate it into a toolkit that markets could activate across social, site, merchandising, paid, and in-store moments.</p></div>
+          <div><h3>The Concept</h3><p><em>Frosted Firework</em>: a visual world inspired by light, warmth, and celebration. Frosted textures, explosive color, and global talent made the holiday story feel modern, inclusive, high-energy, and easy to localize.</p></div>
+          <div><h3>The Results</h3><p>Delivered a full 360 global marketing toolkit across regions, including campaign assets, social templates, merchandising guidance, and digital experiences that supported personalized gifting, daily offers, and holiday product drops.</p></div>
+        </div>
+        <video src="/videos/mac/holiday/group-lineup.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video>
+        <p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 0.8rem; text-align: center;">Frosted Firework — Full Lineup</p>
+      </div>
+
+      <div style="max-width: 1200px; margin: 3rem auto 0; padding: 0 2rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+        <div><video src="/videos/mac/holiday/bretman.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Bretman Rock</p></div>
+        <div><video src="/videos/mac/holiday/loren.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Loren Gray</p></div>
+      </div>
+
+      <div style="max-width: 1200px; margin: 5rem auto 0; padding: 0 2rem;">
+        <h3 style="font-family: 'EB Garamond', serif; font-weight: 500; font-style: italic; font-size: 1.6rem; margin-bottom: 1.2rem;">Fix+ — Reintroduction.</h3>
+        <p style="font-family: 'EB Garamond', serif; font-size: 1.1rem; line-height: 1.65; margin-bottom: 2rem; max-width: 44rem;">Fix+ had been a M·A·C insider tool for twenty years — an artist favorite that consumers either didn't know about or used wrong. We rebuilt the story around versatility: setting spray, primer, blender, refresher, and the updated 6-free, alcohol-free, 12-hour formula.</p>
+        <div class="role-task" style="margin: 0 0 2.4rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem;">
+          <div><h3>The Task</h3><p>Reintroduce Fix+ for a digital-first consumer while preserving its authority with artists. The work needed to clarify what the product does, make the benefits easy to understand, and scale across global product education, social, e-commerce, and paid media.</p></div>
+          <div><h3>The Concept</h3><p>Translate a backstage staple into a modern benefit-led system: refresh, hydrate, prime, set, and extend wear. The campaign framed Fix+ as a flexible skin-prep and makeup-finishing tool rather than a single-use mist.</p></div>
+          <div><h3>The Results</h3><p>Created a modular global content system that made the formula story and usage occasions easier to localize, supporting product education across markets while giving the franchise a cleaner, more contemporary digital presence.</p></div>
+        </div>
+        <div style="margin-bottom: 2rem;">
+          <img class="media-image" src="/images/mac/fix/fix-print.jpeg" alt="M·A·C Fix+ Lavender print campaign visual">
+          <p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 0.8rem; text-align: center;">Fix+ Lavender — Print / Campaign Visual</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem;">
+          <div><video src="/videos/mac/fix/benefit-12-hour-wear.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">12-Hour Wear</p></div>
+          <div><video src="/videos/mac/fix/hack.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Hack</p></div>
+          <div><video src="/videos/mac/fix/noalc.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Alcohol-Free</p></div>
+          <div><video src="/videos/mac/fix/ezo.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">EZO</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECT: AMIKA
+       ============================================================ -->
+  <section class="view" id="work/amika">
+    <div class="project-hero">
+      <img src="/images/amika/get-drenched-hydration-tour.webp" alt="Amika Get Drenched hydration tour bus">
+      <div class="project-hero-overlay"></div>
+      <div class="project-hero-content">
+        <div class="inner">
+          <div class="ph-eyebrow">Amika · Creative Director · June 2022 — January 2023</div>
+          <h1>Amika.</h1>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <div class="shell"><a class="back-link" href="#work">← Selected Work</a></div>
+      <div class="project-facts">
+        <div class="fact-card">
+          <div class="fact-row"><div class="fact-label">Role</div><div class="fact-value">Creative Director</div></div>
+          <div class="fact-row"><div class="fact-label">Company</div><div class="fact-value">Amika</div></div>
+          <div class="fact-row"><div class="fact-label">Tenure</div><div class="fact-value">June 2022 — January 2023</div></div>
+          <div class="fact-row"><div class="fact-label">Focus</div><div class="fact-value">Global creative strategy, full-funnel content systems, brand voice, campaign development, and DTC storytelling.</div></div>
+        </div>
+        <div class="role-task">
+          <div><h3>What I Led</h3><p>I led global creative strategy during a major brand evolution and growth period, connecting campaign storytelling, content production, and performance needs across channels.</p></div>
+          <div><h3>Why It Mattered</h3><p>The work had to protect the brand’s handmade, oddball voice while building a creative system that could scale across Sephora, DTC, paid media, social, and launch campaigns.</p></div>
+        </div>
+      </div>
+      <div class="prose">
+        <p class="lede">A haircare brand that wanted growth without losing its voice. The work was figuring out which parts of the brand actually scaled and which parts had to stay handmade.</p>
+
+        <h3>Let's Get Cleanical.</h3>
+        <p>The clean-ingredient story, told without flinching. We took the clinical claim, painted it Amika-colored, made it sound like a person had said it, and pushed it through the funnel. Number one hair brand at Sephora during the run. Shampoo and conditioner up 35%+. YouTube awareness +12.8%, +22% among the core 25–34.</p>
+
+        <h3>Hairtopia.</h3>
+        <p>Four small surreal 3D worlds for the holidays. The 15-second cut did almost all the work. 67% more views than planned. 239% more clicks. 15.6% lift in ad recall among women 18–24. The lesson was old and unfashionable: tight beats long, strange beats polite, specific beats safe.</p>
+
+        <h3>Get Drenched.</h3>
+        <p>To launch Amika’s hydration franchise in summer 2022, we turned the Get Drenched concept into a mobile, citywide experience: part traveling OOH billboard, part pop-up, part street-level product education.</p>
+        <p>The bus brought sampling, hydration storytelling, and social-ready moments into high-traffic New York neighborhoods. Wrapped in water-inspired campaign artwork, it gave the brand a physical presence during peak summer foot traffic and made the campaign feel immediate, visible, and easy to share.</p>
+      </div>
+
+      <div style="max-width: 1200px; margin: 3.5rem auto 0; padding: 0 2rem;">
+        <img class="media-image" src="/images/amika/get-drenched-hydration-tour.webp" alt="Amika Get Drenched hydration tour bus activation in New York City">
+        <p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.7rem; text-align: center;">Get Drenched — Hydration Tour / Mobile OOH Activation</p>
+      </div>
+
+      <div class="project-facts" style="margin-top: 3rem;">
+        <div class="fact-card">
+          <div class="fact-row"><div class="fact-label">Activation</div><div class="fact-value">Mobile OOH, sampling, product education, and street-level brand discovery.</div></div>
+          <div class="fact-row"><div class="fact-label">Idea</div><div class="fact-value">Turn the hydration claim into a physical summer moment people could see, enter, photograph, and share.</div></div>
+        </div>
+        <div class="role-task">
+          <div><h3>The Work</h3><p>We extended the campaign beyond digital by building a wrapped brand bus that moved through high-traffic NYC neighborhoods, combining large-scale visual impact with curbside consumer engagement.</p></div>
+          <div><h3>The Result</h3><p>The activation reinforced the hydration story through a memorable IRL touchpoint, blending OOH visibility with organic reach as the bus appeared across the city.</p></div>
+        </div>
+      </div>
+
+      <div class="impact-stats">
+        <div><div class="stat-num">57%</div><div class="stat-label">Audience growth across channels</div></div>
+        <div><div class="stat-num">31%</div><div class="stat-label">Sales lift during the growth period</div></div>
+        <div><div class="stat-num">40%</div><div class="stat-label">Increase in social engagement</div></div>
+        <div><div class="stat-num">35%+</div><div class="stat-label">Shampoo and conditioner lift for Cleanical</div></div>
+      </div>
+
+      <div style="max-width: 1200px; margin: 4rem auto 0; padding: 0 2rem;">
+        <video src="/videos/amika/cleanical-30s.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video>
+        <p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 0.8rem; text-align: center;">Let's Get Cleanical — 30 second hero</p>
+      </div>
+
+      <div style="max-width: 1200px; margin: 3rem auto 0; padding: 0 2rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+        <div><video src="/videos/amika/holiday-launch.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Holiday Launch</p></div>
+        <div><video src="/videos/amika/holiday-perkup.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Holiday — Perk Up</p></div>
+      </div>
+
+      <div style="max-width: 1200px; margin: 3rem auto 0; padding: 0 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+        <div><video src="/videos/amika/moisture-verse.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Moisture Verse — Hairtopia</p></div>
+        <div><video src="/videos/amika/realm-of-repair.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Realm of Repair — Hairtopia</p></div>
+        <div><img src="/images/amika/holiday-shiver.avif" alt="Amika Holiday Shiver" style="width: 100%; display: block;"><p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.5rem;">Holiday — Shiver</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECT: VOGUE
+       ============================================================ -->
+  <section class="view" id="work/vogue">
+    <div class="project-hero">
+      <img src="/images/vogue/vogue-wild-child.png" alt="Bella Hadid for Vogue">
+      <div class="project-hero-overlay"></div>
+      <div class="project-hero-content">
+        <div class="inner">
+          <div class="ph-eyebrow">Vogue · Integrated Visual Director · July 2014 — October 2016</div>
+          <h1>A picture is a position.</h1>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <div class="shell"><a class="back-link" href="#work">← Selected Work</a></div>
+      <div class="project-facts">
+        <div class="fact-card">
+          <div class="fact-row"><div class="fact-label">Role</div><div class="fact-value">Integrated Visual Director</div></div>
+          <div class="fact-row"><div class="fact-label">Company</div><div class="fact-value">Vogue</div></div>
+          <div class="fact-row"><div class="fact-label">Tenure</div><div class="fact-value">July 2014 — October 2016</div></div>
+          <div class="fact-row"><div class="fact-label">Focus</div><div class="fact-value">Editorial and commercial productions, visual direction, image research, casting collaborators, shoot production, and digital engagement.</div></div>
+        </div>
+        <div class="role-task">
+          <div><h3>My Role</h3><p>I directed editorial and commercial productions with a focus on visual impact, contributor alignment, and images that could live across print, digital, and social contexts.</p></div>
+          <div><h3>The Work</h3><p>The page now prioritizes full-bleed images when they are stronger than the print layout, while using page layouts for context when the headline, caption, or credit adds important editorial information.</p></div>
+        </div>
+      </div>
+      <div class="prose">
+        <p class="lede">Directing editorial shoots at Vogue during the years when an image still set what culture was looking at. The job was knowing how to frame a moment, cast the right collaborators, and make pictures that didn't apologize for being pictures.</p>
+        <p>Subjects and photographers worth naming. Metrics omitted on purpose — the credit is the credibility.</p>
+      </div>
+
+      <div class="video-embed-section video-feature">
+        <div class="vimeo-frame"><iframe src="https://player.vimeo.com/video/213935402?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Vogue — Bella Hadid's Jet-Lag Beauty Survival Guide"></iframe></div>
+        <p class="video-caption"><strong>Bella Hadid's Jet-Lag Beauty Survival Guide</strong>Vogue Beauty Secrets · A direct-to-camera beauty film that turns Bella Hadid's Dior routine into something intimate, useful, and platform-native — the hotel-bathroom counter as editorial set.</p>
+      </div>
+
+      <div style="height: 3rem;"></div>
+      <div class="credit-gallery">
+        <div class="credit-item featured"><img src="/images/vogue/vogue-something-in-the-air.webp" alt="Georgina Grenville in Hood By Air for Vogue's Something in the Air" style="object-position:center;"><div class="credit-name">Something in the Air</div><div class="credit-photographer">A September 2016 Vogue Beauty feature by Lauren Mechling on the way climate change and air quality had become personal — affecting health, skin, allergies, and the daily experience of city life. Model Georgina Grenville wears Hood By Air. Photographed by Maciek Pozoga.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-wild-child.png" alt="FKA twigs in Wild Child, Vogue" style="object-position:center;"><div class="credit-name">Wild Child</div><div class="credit-photographer">FKA twigs in Vogue’s January 2015 “What to Wear Where” story on statement earrings. The feature framed her as a breakout style presence with a visual language built around movement, individuality, and scale. Photographed by Patrick Demarchelier; fashion editor Sara Moonves.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-girl-on-fire.png" alt="Bella Hadid, Girl on Fire, Vogue" style="object-position:center;"><div class="credit-name">Girl on Fire</div><div class="credit-photographer">Bella Hadid for a September 2016 Vogue Beauty profile on her rise in fashion, social-media velocity, and new beauty contract. Dior blouse and skirt. Photographed by Sean Thomas; fashion editor Celestine Cooney.</div></div>
+        <div class="credit-item"><img src="/images/vogue/feature-1.png" alt="Gigi Hadid and Kendall Jenner in Vogue feature on Instagirls" style="object-position:center;"><div class="credit-name">Gigi Hadid and Kendall Jenner</div><div class="credit-photographer">A Vogue feature on the rise of the “Instagirls,” positioning Gigi Hadid and Kendall Jenner as models whose image power moved through fashion, social platforms, and celebrity culture at once. Gigi Hadid wears La Perla. Photographed by Sebastian Kim; fashion editor Karen Kaiser.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-jorja-smith-her-way.png" alt="Jorja Smith, Her Way, Vogue" style="object-position:center;"><div class="credit-name">Her Way</div><div class="credit-photographer">Jorja Smith in a September 2016 Vogue Music feature on “Blue Lights,” SoundCloud discovery, and a new British R&amp;B voice coming into focus. Smith wears a Kenzo coat and Marques’Almeida top. Photographed by Hart + Lëshkina.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-isamaya-ffrench-performance-piece.jpg" alt="Isamaya Ffrench, Performance Piece, Vogue" style="object-position:center;"><div class="credit-name">Performance Piece</div><div class="credit-photographer">Isamaya Ffrench in Vogue Beauty’s October 2016 profile of the renegade makeup artist and her high-concept, prosthetic, texture-driven approach to beauty. Schiaparelli haute couture blazer and Delfina Delettrez earring. Photographed by Raf Stahelin; sittings editor Lawren Howell.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-kate-moss-charlotte-tilbury.jpg" alt="Kate Moss for Charlotte Tilbury's debut perfume in Vogue" style="object-position:center;"><div class="credit-name">Passion Project</div><div class="credit-photographer">Kate Moss, the face of Charlotte Tilbury’s debut perfume, in a Vogue Beauty story about Tilbury turning desire, skin, and her long-running muse relationship with Moss into a fragrance launch. Photographed by Sølve Sundsbø; fashion editor George Cortina.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-margaret-qualley-kenzo.jpg" alt="Margaret Qualley for Kenzo World, Vogue" style="object-position:center;"><div class="credit-name">The Muse: Margaret Qualley</div><div class="credit-photographer">Margaret Qualley for Vogue’s September 2016 fragrance story on Kenzo World, Carol Lim and Humberto Leon’s offbeat scent platform, and Spike Jonze’s dance-driven launch film. Photographed by Raf Stahelin; fashion editor Lisa Mosko.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-natural-wonder-erdem.png" alt="Erdem Moralioglu and Imaan Hammam, Natural Wonder, Vogue" style="object-position:center;"><div class="credit-name">Natural Wonder</div><div class="credit-photographer">Erdem Moralioglu and Imaan Hammam in “Natural Wonder,” Sarah Mower’s Vogue feature on Erdem’s world: warm modernism, domestic interiors, botanical references, and a designer language rooted in romance without nostalgia.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-david-adjaye-making-his-mark.png" alt="David Adjaye, Making His Mark, Vogue" style="object-position:center;"><div class="credit-name">Making His Mark</div><div class="credit-photographer">Architect David Adjaye photographed as the National Museum of African American History and Culture was taking shape on Washington’s National Mall — a cultural profile about form, memory, and architecture carrying public meaning.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-the-wolfpack-real-life.png" alt="The Wolfpack, Real Life, Vogue" style="object-position:center;"><div class="credit-name">Real Life</div><div class="credit-photographer">Vogue’s feature on Crystal Moselle’s documentary The Wolfpack, about the Angulo brothers, who grew up largely inside a Lower East Side apartment and learned the world through movies before being filmed by Moselle.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-brain-storm-cole-cohen.png" alt="Brain Storm, Cole Cohen, Vogue" style="object-position:center;"><div class="credit-name">Brain Storm</div><div class="credit-photographer">Cole Cohen’s Vogue “Lives” essay about finally receiving a diagnosis that explained why she struggled to judge time and space. The lemon still life works because the image is almost absurdly simple against a story about perception.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-power-puff.webp" alt="Power Puff puffer coat story in Vogue" style="object-position:center;"><div class="credit-name">Power Puff</div><div class="credit-photographer">A November 2016 Vogue fashion moment on the puffer coat’s shift from practical outerwear to high-style silhouette. The image makes the trend feel less like product coverage and more like a weather system.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-anthony-bourdain-food.webp" alt="Anthony Bourdain food story for Vogue" style="object-position:center;"><div class="credit-name">Anthony Bourdain</div><div class="credit-photographer">Food imagery connected to Vogue’s 2016 Bourdain coverage, which treated his global street-food obsession and planned New York food hall as a story about authenticity, appetite, and the social life of eating.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-good-vibrations.jpg" alt="Good Vibrations sound bath story, Vogue" style="object-position:center;"><div class="credit-name">Good Vibrations</div><div class="credit-photographer">A September 2016 Vogue Wellness feature by Alexandra Kleeman on sound baths and sound therapy moving from ancient practice into mainstream wellness culture.</div></div>
+        <div class="credit-item"><img src="/images/vogue/vogue-about-face.webp" alt="About Face models beauty feature, Vogue" style="object-position:center;"><div class="credit-name">About Face</div><div class="credit-photographer">A Vogue beauty page on idiosyncratic models and the changing definition of beauty — selected as much for off-camera lives and distinctive presence as for conventional features.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECT: INTERVIEW
+       ============================================================ -->
+  <section class="view" id="work/interview">
+    <div class="project-hero">
+      <img src="/images/interview/charlize-kristen.jpg" alt="Charlize Theron and Kristen Stewart for Interview">
+      <div class="project-hero-overlay"></div>
+      <div class="project-hero-content">
+        <div class="inner">
+          <div class="ph-eyebrow">Interview Magazine · Visual Editor · 2010 — 2013</div>
+          <h1>Interview Magazine.</h1>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <div class="shell"><a class="back-link" href="#work">← Selected Work</a></div>
+      <div class="prose">
+        <p class="lede">Photo direction at Interview meant balancing cinematic ambition with cultural immediacy. A great editorial portrait says one thing about the subject, very clearly — and trusts the reader to do the rest.</p>
+      </div>
+
+      <div class="video-embed-section">
+        <div class="prose" style="padding: 0; margin-bottom: 2rem;">
+          <h3>Video direction.</h3>
+          <p>Interview's moving-image work extended the same editorial instinct into short celebrity films: close, direct, and built around the subject's presence rather than a heavy concept.</p>
+        </div>
+        <div class="video-grid">
+          <div><div class="vimeo-frame"><iframe src="https://player.vimeo.com/video/630485815?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Interview Magazine — Kristen Stewart & Charlize Theron"></iframe></div><p class="video-caption"><strong>Kristen Stewart &amp; Charlize Theron</strong>Interview Magazine · Snow White and the Huntsman cover story.</p></div>
+          <div><div class="vimeo-frame"><iframe src="https://player.vimeo.com/video/213935359?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Interview Magazine — Emma Stone"></iframe></div><p class="video-caption"><strong>Emma Stone</strong>Interview Magazine · a portrait film built around presence, timing, and a subject who can carry stillness and wit at once.</p></div>
+          <div><div class="vimeo-frame"><iframe src="https://player.vimeo.com/video/213935444?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Interview Magazine — Julianne Hough"></iframe></div><p class="video-caption"><strong>Julianne Hough</strong>Interview Magazine · movement, celebrity, and performance translated into a concise editorial video.</p></div>
+          <div><div class="vimeo-frame"><iframe src="https://player.vimeo.com/video/213935384?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Interview Magazine — Katy Perry"></iframe></div><p class="video-caption"><strong>Katy Perry</strong>Interview Magazine · pop celebrity treated through the magazine's portrait-language rather than fan-service.</p></div>
+          <div><div class="vimeo-frame"><iframe src="https://player.vimeo.com/video/630485796?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Interview Magazine — Jack White"></iframe></div><p class="video-caption"><strong>Jack White</strong>Interview Magazine · musician portraiture with the austerity and tension of a still image.</p></div>
+        </div>
+      </div>
+
+      <div style="height: 3rem;"></div>
+      <div class="credit-gallery">
+        <div class="credit-item"><img src="/images/interview/charlize-kristen.jpg" alt="Charlize Theron and Kristen Stewart"><div class="credit-name">Charlize Theron &amp; Kristen Stewart</div></div>
+        <div class="credit-item"><img src="/images/interview/emma-stone.jpg" alt="Emma Stone"><div class="credit-name">Emma Stone</div></div>
+        <div class="credit-item"><img src="/images/interview/brad-pitt.jpg" alt="Brad Pitt"><div class="credit-name">Brad Pitt</div></div>
+        <div class="credit-item"><img src="/images/interview/jack-white.jpg" alt="Jack White"><div class="credit-name">Jack White</div></div>
+        <div class="credit-item"><img src="/images/interview/katy-perry.jpg" alt="Katy Perry"><div class="credit-name">Katy Perry</div></div>
+        <div class="credit-item"><img src="/images/interview/keira-knightley.jpg" alt="Keira Knightley"><div class="credit-name">Keira Knightley</div></div>
+        <div class="credit-item"><img src="/images/interview/michael-fassbender.jpg" alt="Michael Fassbender"><div class="credit-name">Michael Fassbender</div></div>
+        <div class="credit-item"><img src="/images/interview/mila-kunis.jpg" alt="Mila Kunis"><div class="credit-name">Mila Kunis</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECT: NARS
+       ============================================================ -->
+  <section class="view" id="work/nars">
+    <div class="project-hero">
+      <img src="/images/nars/metaverse-1.webp" alt="NARS concepts">
+      <div class="project-hero-overlay"></div>
+      <div class="project-hero-content">
+        <div class="inner">
+          <div class="ph-eyebrow">Baron &amp; Baron, for NARS · Concept Development</div>
+          <h1>NARS — concepts the brand had to stop apologizing to use.</h1>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <div class="shell"><a class="back-link" href="#work">← Selected Work</a></div>
+      <div class="prose">
+        <p class="lede">Three briefs, three different ways of stopping the apology. Each one started with a cultural question the brand had been dancing around and tried to answer it without hedging.</p>
+
+        <h3>Orgasm — Hot Line.</h3>
+        <p>The line had been NARS' most famous product for a generation. The marketing had treated the name like an inside joke, slightly embarrassed of itself. We took the embarrassment out. The Hot Line concept reintroduced Orgasm as a sex-positive franchise — Angeline-led OOH, a Museum of Sex takeover, IG Live conversations with leading voices in sex positivity. The repeating line — <em>"One Orgasm Every Thirty Seconds"</em> — worked because it didn't flinch.</p>
+
+        <h3>Summer Edit — Bronze On The Go.</h3>
+        <p>A festival-driven bronzing world. A mirrored desert cube at Coachella as a real-time content engine; a Honey Dijon collaboration with a TikTok remix challenge; "30 minutes away" posters that paired real sand textures with destinations named after NARS shade tones. A bronzer becomes a swipe-away vacation. The wit is doing the strategy work.</p>
+
+        <h3>House of NARS.</h3>
+        <p>An immersive "House of NARS" built for Gen Z and the China market — a digital walkable space where each room reintroduced an iconic NARS moment. A brand built for the metaverse without ever using the word.</p>
+      </div>
+
+      <div style="max-width: 1200px; margin: 4rem auto 0; padding: 0 2rem;">
+        <video src="/videos/nars/metaverse-walkthrough.mp4" autoplay muted loop playsinline style="width: 100%; display: block;"></video>
+        <p style="font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 0.8rem; text-align: center;">House of NARS — metaverse walkthrough</p>
+      </div>
+
+      <div class="credit-gallery" style="margin-top: 4rem;">
+        <div class="credit-item"><img src="/images/nars/orgasm-1.webp" alt="NARS Orgasm 1"><div class="credit-name">Orgasm — Hot Line</div></div>
+        <div class="credit-item"><img src="/images/nars/orgasm-2.webp" alt="NARS Orgasm 2"><div class="credit-name">Orgasm — Campaign Imagery</div></div>
+        <div class="credit-item"><img src="/images/nars/orgasm-3.webp" alt="NARS Orgasm 3"><div class="credit-name">Orgasm — OOH</div></div>
+        <div class="credit-item"><img src="/images/nars/orgasm-4.webp" alt="NARS Orgasm 4"><div class="credit-name">Orgasm — Activation</div></div>
+        <div class="credit-item"><img src="/images/nars/orgasm-5.webp" alt="NARS Orgasm 5"><div class="credit-name">Orgasm — Hot Line</div></div>
+        <div class="credit-item"><img src="/images/nars/nars-1.webp" alt="NARS 1"><div class="credit-name">Bronze On The Go</div></div>
+        <div class="credit-item"><img src="/images/nars/nars-2.webp" alt="NARS 2"><div class="credit-name">Bronze — Summer Edit</div></div>
+        <div class="credit-item"><img src="/images/nars/nars-3.webp" alt="NARS 3"><div class="credit-name">Bronze — Coachella</div></div>
+        <div class="credit-item"><img src="/images/nars/nars-4.webp" alt="NARS 4"><div class="credit-name">Bronze — Travel Posters</div></div>
+        <div class="credit-item"><img src="/images/nars/nars-5.webp" alt="NARS 5"><div class="credit-name">Bronze — Honey Dijon</div></div>
+        <div class="credit-item"><img src="/images/nars/nars-caviar.webp" alt="NARS Caviar"><div class="credit-name">Caviar — Uber Eats / Postmates</div></div>
+        <div class="credit-item"><img src="/images/nars/metaverse-1.webp" alt="House of NARS 1"><div class="credit-name">House of NARS — Entry</div></div>
+        <div class="credit-item"><img src="/images/nars/metaverse-2.webp" alt="House of NARS 2"><div class="credit-name">House of NARS — Room</div></div>
+        <div class="credit-item"><img src="/images/nars/metaverse-4.webp" alt="House of NARS 4"><div class="credit-name">House of NARS — Render</div></div>
+        <div class="credit-item"><img src="/images/nars/metaverse-5.webp" alt="House of NARS 5"><div class="credit-name">House of NARS — Interior</div></div>
+        <div class="credit-item"><img src="/images/nars/metaverse-6.webp" alt="House of NARS 6"><div class="credit-name">House of NARS — Detail</div></div>
+        <div class="credit-item"><img src="/images/nars/metaverse-orgasm-3.webp" alt="House of NARS Orgasm"><div class="credit-name">House of NARS — Orgasm Room</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECT: SNOW PEAK
+       ============================================================ -->
+  <section class="view" id="work/snowpeak">
+    <div class="project-hero">
+      <img src="/images/strategy/snowpeak/slide-01.jpg" alt="Snow Peak — Return">
+      <div class="project-hero-overlay"></div>
+      <div class="project-hero-content">
+        <div class="inner">
+          <div class="ph-eyebrow">Snow Peak · 2026 · US Brand Campaign Concept</div>
+          <h1>Permanence is the open lane.</h1>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <div class="shell"><a class="back-link" href="#work">← Selected Work</a></div>
+      <div class="prose">
+        <p class="lede">A US brand campaign for a sixty-seven-year-old Japanese outdoor brand that most Americans haven't heard of yet.</p>
+        <p>The argument is simple. Patagonia owns sustainability. Arc'teryx owns performance. Snow Peak can own what no outdoor brand in America currently owns — <em>permanence</em>. The campaign isn't about gear. It's about a different relationship to stuff.</p>
+        <p>This is the third tier of the work on this site: creative direction at the level of the brief. Not the photograph, not the campaign film, not the production. The shape of the argument before any of those exist.</p>
+      </div>
+
+      <div style="max-width: 1400px; margin: 4rem auto 0; padding: 0 2rem;">
+        <img src="/images/strategy/snowpeak/slide-01.jpg" alt="Snow Peak — Return — Slide 01" style="width: 100%; display: block; margin-bottom: 1.5rem;">
+        <img src="/images/strategy/snowpeak/slide-02.jpg" alt="Snow Peak — The opening is real — Slide 02" style="width: 100%; display: block; margin-bottom: 1.5rem;">
+        <img src="/images/strategy/snowpeak/slide-03.jpg" alt="Snow Peak — Permanence is open — Slide 03" style="width: 100%; display: block; margin-bottom: 1.5rem;">
+        <img src="/images/strategy/snowpeak/slide-04.jpg" alt="Snow Peak — Return — Slide 04" style="width: 100%; display: block;">
+      </div>
+
+      <div class="prose" style="margin-top: 4rem;">
+        <p>The deck argues for a campaign about recognition rather than reach. Snow Peak doesn't need new customers as much as it needs to be seen, accurately, by the ones it already has — a customer who buys less, buys better, and keeps things long enough to become part of her life. She does not want to be inspired. She wants to be recognized.</p>
+        <p>The five "Returns" — to nature, craft, slowness, community, and the product itself — are not five different campaigns. They are five jobs a single campaign line is asked to do at once. Permanence is the word that makes that possible.</p>
+        <p><em>This is not a relevance problem. It is an articulation problem.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECT: DANCEONE
+       ============================================================ -->
+  <section class="view" id="work/danceone">
+    <div class="project-hero">
+      <img src="/images/danceone/kaos-hero.gif" alt="DanceOne">
+      <div class="project-hero-overlay"></div>
+      <div class="project-hero-content">
+        <div class="inner">
+          <div class="ph-eyebrow">DanceOne · Director, Content Strategy & Operations · June 2024 — June 2025</div>
+          <h1>DanceOne.</h1>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">
+      <div class="shell"><a class="back-link" href="#work">← Selected Work</a></div>
+      <div class="project-facts">
+        <div class="fact-card">
+          <div class="fact-row"><div class="fact-label">Role</div><div class="fact-value">Director of Content Strategy &amp; Operations</div></div>
+          <div class="fact-row"><div class="fact-label">Company</div><div class="fact-value">Dance One</div></div>
+          <div class="fact-row"><div class="fact-label">Tenure</div><div class="fact-value">June 2024 — June 2025</div></div>
+          <div class="fact-row"><div class="fact-label">Focus</div><div class="fact-value">Strategy, capture systems, production operations, event content workflows, producers, editors, operators, and delivery.</div></div>
+        </div>
+        <div class="role-task">
+          <div><h3>My Role</h3><p>I built and scaled a multi-city content engine for a national touring brand, managing strategy, capture, production, and delivery across major events.</p></div>
+          <div><h3>The Task</h3><p>The job was to turn scattered event capture into a repeatable content operation: clearer strategy, better playbooks, faster approvals, and output that matched the speed and emotional language of competitive dance culture.</p></div>
+        </div>
+      </div>
+      <div class="prose">
+        <p class="lede">DanceOne is the largest force in competitive dance and has a Gen-Z audience that lives on TikTok. The brief wasn't to make ads — it was to build the operating system behind a content engine that could keep up with live events across cities.</p>
+        <p>I rebuilt the multi-city content system: a strategy organized around choreography trends, backstage fashion, and TikTok-native storytelling. Capture playbooks, SOPs, and a cross-functional workflow connecting producers, editors, operators, and event staff.</p>
+        <p>The shift was from "asset production" to "a content practice that runs on its own." Stronger visual identity. More emotional, fashion-driven storytelling. Output that matched the energy of TikTok dance culture rather than translating it into something the brand could live with.</p>
+      </div>
+
+      <div class="impact-stats five">
+        <div><div class="stat-num">35%</div><div class="stat-label">Audience engagement increase</div></div>
+        <div><div class="stat-num">20%</div><div class="stat-label">Retention increase</div></div>
+        <div><div class="stat-num">30%</div><div class="stat-label">Operational efficiency improvement</div></div>
+        <div><div class="stat-num">25%</div><div class="stat-label">Reduction in development cycles</div></div>
+        <div><div class="stat-num">98%</div><div class="stat-label">On-time asset pipeline delivery</div></div>
+      </div>
+
+      <div class="dance-video-section">
+        <div class="dance-video-card dance-phone-card dance-video-feature">
+          <video src="/videos/danceone/dance-1.mp4" autoplay muted loop playsinline></video>
+          <p class="dance-video-caption">Comfort Fedoke joins OVATION</p>
+        </div>
+      </div>
+
+      <div class="dance-video-grid">
+        <div class="dance-vertical-stack">
+          <div class="dance-video-card dance-phone-card">
+            <video src="/videos/danceone/dance-2.mp4" autoplay muted loop playsinline></video>
+            <p class="dance-video-caption">OVATION Apparel — Streetwear</p>
+          </div>
+        </div>
+        <div class="dance-landscape-stack">
+          <div class="dance-video-card dance-landscape-card">
+            <video src="/videos/danceone/dance-4.mp4" autoplay muted loop playsinline></video>
+            <p class="dance-video-caption">This Is KAOS</p>
+          </div>
+          <div class="dance-video-card dance-landscape-card">
+            <video src="/videos/danceone/dance-5.mp4" autoplay muted loop playsinline></video>
+            <p class="dance-video-caption">The One Nationals</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       NOTES INDEX
+       ============================================================ -->
+  <section class="view inner-page" id="notes">
+    <div class="shell">
+      <div class="page-head">
+        <div class="page-eyebrow">Notes on Brands That Mean Something</div>
+        <h2 class="page-title">A small collection of pieces about brand work, written for people who can tell.</h2>
+      </div>
+      <p class="notes-intro">A portfolio shows what you've done. These show how I think. Frameworks, observations, and annotations from the practice — short pieces, no images, no subscribe form.</p>
+      <div class="notes-list">
+        <div class="note-row"><a href="#notes/camera-and-the-machine"><div class="note-meta">Frameworks<br>June 2026</div><div><div class="note-title">On the camera and the machine.</div><div class="note-dek">When photography first arrived in the 1800s, people dismissed it as a cheap trick. Painters panicked. The same fears we hear about AI today. New tools do not kill creativity. They expand it.</div></div></a></div>
+        <div class="note-row"><a href="#notes/working-with-the-machine"><div class="note-meta">Frameworks<br>June 2026</div><div><div class="note-title">On working with the machine.</div><div class="note-dek">I once had a boss who thought it was a flaw that I couldn't make photo-quality mockups in Photoshop. They wanted pixel-perfect comps before we had validated the idea. I remember thinking: I'd rather spend my time making the idea better.</div></div></a></div>
+        <div class="note-row"><a href="#notes/moves-i-made"><div class="note-meta">Letters<br>June 2026</div><div><div class="note-title">On the moves I made.</div><div class="note-dek">The cleanest version of a creative career is one company for thirty years. I do not have that career. I have something more useful for the work I want now.</div></div></a></div>
+        <div class="note-row"><a href="#notes/creative-direction"><div class="note-meta">Frameworks<br>June 2026</div><div><div class="note-title">On what gets called creative direction.</div><div class="note-dek">The best creative work I have made was made by people I had the good sense to invite into the room, and the better sense to leave alone once they were there.</div></div></a></div>
+        <div class="note-row"><a href="#notes/brands-feel-late"><div class="note-meta">Observations<br>June 2026</div><div><div class="note-title">Why brands feel late.</div><div class="note-dek">The fastest thing in the world right now is the speed at which a fifteen-year-old learns a new visual grammar. The slowest is the speed at which an organization with a marketing department decides what to do about it.</div></div></a></div>
+        <div class="note-row"><a href="#notes/place-to-stand"><div class="note-meta">Frameworks<br>May 2026</div><div><div class="note-title">On the difference between a brand and a place to stand.</div><div class="note-dek">A brand has a positioning statement. A place to stand has a reason it would still exist if no one had thought to write the statement.</div></div></a></div>
+        <div class="note-row"><a href="#notes/what-customer-knows"><div class="note-meta">Frameworks<br>May 2026</div><div><div class="note-title">On what the customer already knows.</div><div class="note-dek">Most briefs assume the customer is somewhere behind us. She is usually ahead of us. She has seen ten years of versions of the thing we are about to show her.</div></div></a></div>
+        <div class="note-row"><a href="#notes/surrealism"><div class="note-meta">Observations<br>May 2026</div><div><div class="note-title">What surrealism was actually telling us.</div><div class="note-dek">The big shoe is a flare gun. It says: please look. We are still here. That is a fine thing to do once. It is a bad thing to build a strategy around.</div></div></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notes detail pages -->
+  <section class="view inner-page" id="notes/camera-and-the-machine">
+    <div class="shell"><a class="back-link" href="#notes">← Notes</a></div>
+    <div class="note-detail">
+      <div class="note-meta">Frameworks · June 2026 · 3 min read</div>
+      <h1>On the camera and the machine.</h1>
+
+      <p>When photography first arrived in the 1800s, people dismissed it as a cheap trick.</p>
+      <p>Painters panicked. Critics said it required no talent.</p>
+      <p>The same fears we hear about AI today.</p>
+      <p>I studied photography at Pratt. I learned image making through light, composition, intention, and craft.</p>
+      <p>I also grew up watching technology evolve. I have always been drawn to how visual language travels across new mediums.</p>
+      <p>My career has moved through brand, campaign, and digital work, driven by one question: how can imagery shape culture and connect with people in more meaningful ways?</p>
+      <p>AI and spatial tech feel like the next natural chapter in that evolution.</p>
+      <p>Here is the pattern I keep seeing.</p>
+      <p>New tools do not kill creativity. They expand it.</p>
+      <p>The camera did not replace painting. It opened new forms of expression for those willing to explore them. AI is asking us to do the same.</p>
+      <p>The core skills that matter in visual storytelling have not changed: taste, perspective, meaning, emotion. Those only become more valuable as the tools evolve.</p>
+      <p>I am not interested in using AI to replace creativity. I am interested in using it to expand what a creative director can be today.</p>
+      <p>Too many roles keep creativity in a narrow lane. I want to bring everything I know about imagery, culture, and story into spaces that invite experimentation — new tools, new forms of expression.</p>
+      <p>AI will not replace image makers.</p>
+      <p>Image makers who embrace it will shape what image making becomes.</p>
+    </div>
+  </section>
+
+  <section class="view inner-page" id="notes/working-with-the-machine">
+    <div class="shell"><a class="back-link" href="#notes">← Notes</a></div>
+    <div class="note-detail">
+      <div class="note-meta">Frameworks · June 2026 · 4 min read</div>
+      <h1>On working with the machine.</h1>
+
+      <p>I once had a boss who thought it was a flaw that I couldn't make photo-quality mockups in Photoshop.</p>
+      <p>They wanted pixel-perfect comps before we had validated the idea.</p>
+      <p>I remember thinking: I'd rather spend my time making the idea better.</p>
+      <p>That friction shaped how I think about creative leadership.</p>
+      <p>Fast forward to now. That boss's work looks exactly like it did then — same visual language, same approach, same energy. The industry moved on. Platforms shifted. Audiences evolved. The tools exploded.</p>
+      <p>The future of creative direction isn't about who can render fastest. It's about who has the clearest thinking, the strongest ideas, and the ability to move at the speed culture demands.</p>
+      <p>That is where AI changes everything.</p>
+      <p>I use AI the way I used to work with a great copywriter — as a collaborator that speeds up iteration without replacing judgment.</p>
+      <p>Midjourney and DALL-E let me explore visual directions in minutes. I can test five concepts before a kickoff and walk in with clarity, not guesses.</p>
+      <p>ChatGPT refines messaging and helps me think through positioning faster. It is like having a copy editor on call.</p>
+      <p>AI production tools let us create three times the variations in half the time.</p>
+      <p>AI is infrastructure. It removes friction so creative teams can focus on what matters: the thinking, the taste, the cultural instinct no tool can replicate.</p>
+      <p>The old model rewarded technical virtuosity — who could build the most polished deck, who could stay in Adobe the longest.</p>
+      <p>The new model rewards velocity and clarity. Getting to the right idea faster. Testing with real data. Building systems that scale. Staying platform-native and culturally fluent.</p>
+      <p>AI doesn't replace creative directors. It separates the ones who lead with ideas from the ones who hide behind execution.</p>
+      <p>The machine produces the volume. The choosing is still the job.</p>
+      <p>In an industry where most of the labor cost was always in the executing, the executing cost is collapsing. The judgment cost is what's left.</p>
+      <p>That makes taste, position, and conviction the actual scarce resources. People who can decide become more valuable. People who can only execute become less.</p>
+      <p>This portfolio was rebuilt with the machine as a daily collaborator. It is not the part of the work that should be hidden. It is the part of the work that explains how I am still here — still arguing, still making things that mean something.</p>
+      <p>The machine made the volume cheap.</p>
+      <p>It made the conviction obvious.</p>
+    </div>
+  </section>
+
+  <section class="view inner-page" id="notes/moves-i-made">
+    <div class="shell"><a class="back-link" href="#notes">← Notes</a></div>
+    <div class="note-detail">
+      <div class="note-meta">Letters · June 2026 · 3 min read</div>
+      <h1>On the moves I made.</h1>
+      <p>The cleanest version of a creative career is one company for thirty years.</p>
+      <p>I do not have that career.</p>
+      <p>The next cleanest version is two companies — early years somewhere prestigious, mid-career at the company you build into a thing. I do not have that career either.</p>
+      <p>What I have, on the page, is editorial, then beauty, then haircare, then dance, with two freelance periods threaded through.</p>
+      <p>Read one way, that arc looks chaotic.</p>
+      <p>Read another way, it is the only path that gets me to the work I am actually trying to do.</p>
+      <p>I started in editorial because the magazine was the room where culture decided what mattered. When the magazine stopped being the only room, I left it. I went inside heritage beauty because the next room was the brand itself, and you cannot understand how a brand earns trust without seeing how it actually behaves on a Tuesday.</p>
+      <p>I went DTC because scaling without losing texture is one of the hardest problems in modern brand work, and I wanted to see how the levers actually felt. I went to live content systems because cultural attention had migrated into a place that few people who came up in editorial knew how to operate in.</p>
+      <p>Every move I made was a vote against staying inside one literacy.</p>
+      <p>I took freelance periods between roles for a reason that is easy to explain and hard to advertise: I did not want my next job to decide what I thought for me. Both periods produced some of the most original strategic work on this site. Snow Peak, the NARS conceptual work, the pitches I am still building toward — they were made in the rooms where nobody outranked me into a different opinion.</p>
+      <p>What I have learned, from making the moves I made, is that the brands that matter for the next decade are not going to be solved by editorial taste alone, platform fluency alone, or strategic confidence alone. They need somebody who has lived all three and is unafraid to argue with the brief.</p>
+      <p>I am one of a relatively small number of people who has done all three.</p>
+      <p>That is the job I am looking for now.</p>
+    </div>
+  </section>
+
+  <section class="view inner-page" id="notes/place-to-stand">
+    <div class="shell"><a class="back-link" href="#notes">← Notes</a></div>
+    <div class="note-detail">
+      <div class="note-meta">Frameworks · May 2026 · 3 min read</div>
+      <h1>On the difference between a brand and a place to stand.</h1>
+      <p>A brand is what a company says. A place to stand is what it does, every day, when no one is watching.</p>
+      <p>Most brands are brands. A few brands are places to stand.</p>
+      <p>You can tell the difference in about ninety seconds.</p>
+      <p>A brand has a brand book. A place to stand has a smell. A regular. An hour at which the door opens. A way of folding the bag.</p>
+      <p>A brand has a tone of voice. A place to stand has a person who answers the phone.</p>
+      <p>A brand has a positioning statement. A place to stand has a reason it would still exist if no one had thought to write the statement.</p>
+      <p>The reason this matters now, more than it did, is that the platform era trained customers to expect that a brand is the campaign and the campaign is the feed. Both of those things are decoration. They are not bad. They are just not enough.</p>
+      <p>The customer who has spent ten years scrolling has become very good at seeing through decoration. She is not articulate about it. She doesn't post about it. She just doesn't come back.</p>
+      <p>This is the part the dashboards miss. The metric for <em>will not come back</em> is unfilled.</p>
+      <p>The brands that are working right now, quietly, are not the loudest ones. They are the ones whose product, language, store, packaging, and Sunday hours all answer the same single question. The customer can feel the answer before she can name it. That is what trust is. It is a feeling she had before she had a thought about it.</p>
+      <p>A brand asks: <em>how do we appear to her?</em></p>
+      <p>A place to stand asks: <em>what is she actually doing here?</em></p>
+      <p>The second question is harder. It has fewer experts. It pays better in the long term and worse in the short term.</p>
+      <p>Most clients want the first. The interesting clients want the second.</p>
+    </div>
+  </section>
+
+  <section class="view inner-page" id="notes/what-customer-knows">
+    <div class="shell"><a class="back-link" href="#notes">← Notes</a></div>
+    <div class="note-detail">
+      <div class="note-meta">Frameworks · May 2026 · 3 min read</div>
+      <h1>On what the customer already knows.</h1>
+      <p>Most briefs assume the customer is somewhere behind us.</p>
+      <p>That she needs to be educated. Persuaded. Walked carefully toward the conclusion the brand has already reached. The campaign is the explanation.</p>
+      <p>The customer is rarely behind us. She is usually ahead of us. She has seen ten years of versions of the thing we are about to show her. She knows the angle before the angle has been chosen.</p>
+      <p>You can see this in two places, very clearly.</p>
+      <p>The first is retouching. For most of the last decade, retouching was the unstated language of beauty. It said: we have decided what is acceptable, and we have made it perfect for you. The customer learned to read the language. Then she learned to dislike it. Then she learned to distrust it. By the time brands started un-retouching, it had stopped being a gesture and started being a baseline. The customer was already there.</p>
+      <p>The second is celebrity endorsement. It used to be enough that someone famous was in the campaign. The customer would do the rest of the work. Now the customer asks, immediately: <em>did they actually use this? did the photographer have any agency? whose idea was this?</em> She wants to know if the relationship between the famous person and the brand is real. She can usually tell.</p>
+      <p>The brands that are working right now have made a quiet adjustment.</p>
+      <p>They have stopped trying to be more aspirational than the customer.</p>
+      <p>They have started trying to be more honest than the customer expected.</p>
+      <p>That is the move. It is harder than it sounds. It requires you to figure out what the customer is already noticing, before she names it, and to walk toward the noticing rather than away from it.</p>
+      <p>The brands that figure this out next will keep their audiences. The ones that don't will keep paying for media against people who already left.</p>
+    </div>
+  </section>
+
+  <section class="view inner-page" id="notes/surrealism">
+    <div class="shell"><a class="back-link" href="#notes">← Notes</a></div>
+    <div class="note-detail">
+      <div class="note-meta">Observations · May 2026 · 2 min read</div>
+      <h1>What surrealism was actually telling us.</h1>
+      <p>Two years ago Business of Fashion called the moment <em>"surrealist marketing."</em></p>
+      <p>Big shoes. Mouths in cars. A handbag the size of a kitchen.</p>
+      <p>The pieces that called it surrealism were half right. The shoes are not the point. The shoes are the symptom.</p>
+      <p>The point is that customers stopped believing the previous register. The previous register was: a beautiful woman in a beautiful field, looking at the middle distance, slightly windblown. That register depended on her being more aspirational than the customer.</p>
+      <p>The customer caught up. Then the customer surpassed her.</p>
+      <p>The aspirational image stopped doing the job. The customer was already there.</p>
+      <p>So the brands did the thing brands do when their grammar stops working. They got loud.</p>
+      <p>Surrealism was the loud. The big shoe is a flare gun. It says: <em>please look. We are still here.</em></p>
+      <p>That is a fine thing to do once. It is a bad thing to build a strategy around.</p>
+      <p>The brands that are going to come out of this period strongest are not the ones with the biggest shoes. They are the ones that figured out a quieter answer to the same question.</p>
+      <p>The question is: <em>why should anyone notice you, again, on a Tuesday?</em></p>
+      <p>The loud answer is a giant inflatable boot. The quiet answer is harder. It usually involves a thing the brand actually does, or makes, or sells, that justifies its place in the room without the boot.</p>
+      <p>The brands without that answer will keep getting weirder until they exhaust themselves. The brands with that answer will keep being interesting after the trend ends.</p>
+    </div>
+  </section>
+
+  <section class="view inner-page" id="notes/creative-direction">
+    <div class="shell"><a class="back-link" href="#notes">← Notes</a></div>
+    <div class="note-detail">
+      <div class="note-meta">Frameworks · June 2026 · 3 min read</div>
+      <h1>On what gets called creative direction.</h1>
+
+      <p>Most descriptions of creative direction make it sound like authorship.</p>
+      <p>The creative director, in this version, has a vision. The vision is good or bad. Everyone else executes the vision. Their job is fidelity. The director's job is conviction.</p>
+      <p>This is almost entirely wrong.</p>
+      <p>The best creative work I have made was made by people I had the good sense to invite into the room, and the better sense to leave alone once they were there.</p>
+      <p>Studio Radiance was a foundation campaign. The brief was modernization. The actual job — once you stripped the layers off — was to stop retouching. That was the position, that was the conviction, that was the line in the sand. I drew it.</p>
+      <p>Everything you can see in the actual campaign was made by other people.</p>
+      <p>Micaiah Carter and Campbell Addy decided what the photographs would look like. The cast — who were activists, athletes, artists — decided how to be in front of the camera. They decided what their homes looked like the day they were photographed in them. They decided which moments of their own week to film themselves. The makeup artists decided what the faces would actually look like. The cast edited their own footage.</p>
+      <p>I did not direct any of those decisions. I made it possible for those decisions to be made by those people.</p>
+      <p>That distinction is the entire job.</p>
+      <p>The version of creative direction that thinks of itself as authorship loses access to almost everything good about working with other artists. It is the difference between an editor who has opinions and an editor who has notes. The editor with opinions tells the writer what to write. The editor with notes asks the writer what they were trying to do and where the writing didn't get there.</p>
+      <p>I want to be the second kind.</p>
+      <p>There is a corporate version of <em>creative direction</em> that operates on the first model. It produces, predictably and on schedule, work that is technically excellent and feels like nothing.</p>
+      <p>I have spent fifteen years trying not to make that work.</p>
+      <p>The way out has always been the same. You invite the right people. You set the rules of engagement so cleanly that they free everyone instead of constraining anyone. You ask questions. You stay out of the way.</p>
+      <p>You take the credit, when there is credit to take, in the form of who you got into the room and what you let them do.</p>
+      <p>That is what gets called creative direction.</p>
+    </div>
+  </section>
+
+  <section class="view inner-page" id="notes/brands-feel-late">
+    <div class="shell"><a class="back-link" href="#notes">← Notes</a></div>
+    <div class="note-detail">
+      <div class="note-meta">Observations · June 2026 · 3 min read</div>
+      <h1>Why brands feel late.</h1>
+
+      <p>The fastest thing in the world right now is the speed at which a fifteen-year-old learns a new visual grammar.</p>
+      <p>She does it without a textbook.</p>
+      <p>She does it without realizing she is doing it.</p>
+      <p>She sees a thousand examples of a new kind of cut, a new caption rhythm, a new way of holding the camera, and within a week she is producing it back to her friends in her own voice.</p>
+      <p>The slowest thing in the world right now is the speed at which an organization with a marketing department decides what to do about it.</p>
+      <p>This is the actual gap. It isn't a creativity gap. It isn't a talent gap. It isn't even a brief gap.</p>
+      <p>It is a fluency gap.</p>
+      <p>Customers — particularly younger ones — read platform-native visual languages the way I read a sentence. They don't see <em>style</em>. They see meaning. They register what a brand is trying to do at the same speed they register what their friend at brunch is trying to do.</p>
+      <p>What they catch, most of the time, is the brand trying to translate one register into another. A TikTok-style edit cut by an agency that has never made a TikTok. A "raw" Instagram feed that has been color-graded for cohesion. A "behind the scenes" video that was lit by a DP. The customer reads all of this in under three seconds and silently downgrades the brand's trustworthiness by a measurable amount.</p>
+      <p>The organization doesn't see this happen because the organization is looking at a different dashboard.</p>
+      <p>There is no metric for <em>she silently downgraded you</em>.</p>
+      <p>The only fix is operational. Hire people who speak the language natively. Trust their judgment. Reduce the number of approvals between the camera and the post. Stop trying to translate from the conference room into the feed.</p>
+      <p>The brands that figure this out will look fluent.</p>
+      <p>The ones that don't will keep paying a premium for a slight foreign accent.</p>
+      <p>The slight foreign accent is what costs them the customer.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+       ============================================================ -->
+  <section class="view inner-page" id="about">
+    <div class="shell">
+      <div class="page-head">
+        <div class="page-eyebrow">About</div>
+        <h2 class="page-title">A creative director and strategist who has worked inside every era of how brands earn attention.</h2>
+      </div>
+    </div>
+    <div class="about-wrap">
+      <div class="about-portrait">
+        <img src="/images/about/portrait.gif" alt="Alex O'Neill">
+      </div>
+      <div class="about-prose">
+        <p>I came up in editorial — Interview, then Vogue — directing photo shoots when magazines were still the room where culture decided what mattered.</p>
+        <p>Then I moved inside the brands. M·A·C, modernizing the skin aesthetic of a heritage brand for the digital era — including Studio Radiance, the foundation campaign that took retouching off the table. Amika, building DTC creative that actually moved units. NARS, with Baron &amp; Baron, pushing ideas that lived past the campaign window. DanceOne, building the content systems behind a generation's relationship to dance.</p>
+        <p>The work I'm most interested in lately is on the conceptual side — the kind of brief that starts with a cultural question and ends as something more durable than a campaign.</p>
+        <p>What I'm interested in now: brands that earn trust by behaving like they mean it. Specificity instead of polish. Communities instead of audiences. Less theater. More reasons to show up.</p>
+        <p style="margin-top: 1.6rem;"><em>On the path.</em> The three eras above look unconventional on a résumé. They were intentional. Editorial taught me what a picture is for. Platform taught me how a brand actually moves. Strategy is where those two literacies become one job — figuring out what the brand should be doing before anyone makes a campaign about it.</p>
+        <p>I have taken two periods of independent freelance work in the last fifteen years. They were not gaps. They produced some of the most original thinking on this site: Snow Peak, the NARS work with Baron &amp; Baron, and pitches I am still building toward. Independent work made me better at the question I want to spend the next ten years asking.</p>
+        <p>What I am looking for now: a role where the brief is upstream of the campaign. Where the job is to argue what the brand should be doing, not to make it look better while doing it. Head of Creative Strategy, VP Brand Strategy, Brand Director, Chief Brand Officer — at the right size of company, with the right room. Title open. Picky on whether the room has the door open.</p>
+        <p style="margin-top: 1.6rem;"><em>How I lead: in rooms with the door open. The best work on this site was made by everyone who walked into them — photographers, makeup artists, producers, account leads, the cast themselves. My job is to ask the better question, set the rules of engagement, and then listen. Strategy is collaborative or it's wrong.</em></p>
+        <p style="margin-top: 2rem;"><a href="mailto:alexjoneill@me.com">alexjoneill@me.com</a> · <a href="https://www.linkedin.com/in/alexjoneill/" target="_blank">LinkedIn</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+       ============================================================ -->
+  <section class="view inner-page" id="contact">
+    <div class="contact-block">
+      <a class="big-email" href="mailto:alexjoneill@me.com">alexjoneill@me.com</a>
+      <p class="sub">If you're building something that has to mean something, write me.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" type="button" aria-label="Close image">×</button>
+  <img src="" alt="">
+  <div class="lightbox-caption"></div>
+</div>
+
+<footer class="site">
+  <div class="shell row">
+    <div class="footer-thesis">"I'm a creative director and strategist. Mostly I help brands stop sounding fake."</div>
+    <div class="footer-meta">
+      © Alex O'Neill
+      <a href="mailto:alexjoneill@me.com">Email</a>
+      <a href="https://www.linkedin.com/in/alexjoneill/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Hero slide rotation
+  (function() {
+    const slides = document.querySelectorAll('.hero-slide');
+    if (slides.length < 2) return;
+    let idx = 0;
+    setInterval(() => {
+      slides[idx].classList.remove('is-active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('is-active');
+    }, 4500);
+  })();
+
+  // Marquee: clone items into the track for seamless loop
+  (function() {
+    const items = [
+      { img: '/images/vogue/vogue-wild-child.png', cap: 'Vogue · Wild Child · 2016' },
+      { img: '/images/mac/studio-radiance/face-and-body.gif', cap: 'M·A·C · Studio Radiance' },
+      { img: '/images/interview/charlize-kristen.jpg', cap: 'Interview · Charlize & Kristen' },
+      { img: '/images/amika/get-drenched-hydration-tour.webp', cap: 'Amika · Get Drenched · 2022' },
+      { img: '/images/vogue/vogue-kendall-dream-season.png', cap: 'Vogue · Dream Season' },
+      { img: '/images/vogue/vogue-girl-on-fire.png', cap: 'Vogue · Girl on Fire' },
+      { img: '/images/interview/brad-pitt.jpg', cap: 'Interview · Brad Pitt' },
+      { img: '/images/vogue/vogue-taking-flight.png', cap: 'Vogue · Taking Flight' },
+      { img: '/images/interview/jack-white.jpg', cap: 'Interview · Jack White' },
+      { img: '/images/vogue/vogue-rooftop-garden.png', cap: 'Vogue · Editorial' },
+      { img: '/images/nars/metaverse-1.webp', cap: 'NARS · House of NARS' },
+      { img: '/images/vogue/vogue-fresh-direct.png', cap: 'Vogue · Fresh Direct' }
+    ];
+    const track = document.getElementById('marqueeTrack');
+    if (!track) return;
+    const html = items.map(i => `
+      <a class="marquee-item" href="#work">
+        <div class="mi-img"><img src="${i.img}" alt="${i.cap}" loading="lazy"></div>
+        <div class="mi-caption">${i.cap}</div>
+      </a>
+    `).join('');
+    track.innerHTML = html + html;
+  })();
+
+  // Hash-based view switching
+  function showView() {
+    const hash = (location.hash || '#home').replace(/^#/, '');
+    const target = document.getElementById(hash) || document.getElementById('home');
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    target.classList.add('active');
+    const top = hash.split('/')[0];
+    document.querySelectorAll('nav.primary a').forEach(a => {
+      const navKey = a.getAttribute('data-nav');
+      a.classList.toggle('active', navKey === top);
+    });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    // Header background — light bg when not on home, transparent on home (over hero)
+    const header = document.getElementById('siteHeader');
+    if (top === 'home') {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    } else {
+      header.classList.add('scrolled');
+    }
+  }
+  window.addEventListener('hashchange', showView);
+  window.addEventListener('scroll', () => {
+    const hash = (location.hash || '#home').replace(/^#/, '');
+    const top = hash.split('/')[0];
+    if (top === 'home') {
+      document.getElementById('siteHeader').classList.toggle('scrolled', window.scrollY > 60);
+    }
+  });
+  showView();
+
+  // Click-to-expand for still images
+  (function() {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+    const lbImg = lightbox.querySelector('img');
+    const lbCaption = lightbox.querySelector('.lightbox-caption');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+
+    function openLightbox(img) {
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt || '';
+      const item = img.closest('.credit-item');
+      const name = item ? item.querySelector('.credit-name')?.textContent : '';
+      const meta = item ? item.querySelector('.credit-photographer')?.textContent : '';
+      lbCaption.textContent = [name, meta].filter(Boolean).join(' · ') || img.alt || '';
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lbImg.src = '';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('click', (e) => {
+      const img = e.target.closest('.credit-item img, img.media-image');
+      if (img) openLightbox(img);
+      if (e.target === lightbox || e.target === closeBtn) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+  })();
+
+</script>
+
+</body>
+</html>
